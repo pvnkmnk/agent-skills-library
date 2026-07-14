@@ -1,25 +1,25 @@
-# Lyrics and Theory Bridge
+# lyrics-and-theory-bridge
 
-Bridges lyric writing with music theory — connects rhyme schemes, flow cadence, and syllable stress to the harmonic and rhythmic structure of the underlying music. Primary context: hip-hop, underground rap, and experimental genres.
+Bridges lyric writing with practical music theory — maps syllable stress to the beat grid, aligns harmonic function with emotional intent, and gives targeted edit suggestions without overwriting your voice.
 
 ## Quick Start
 
-`Invoke lyrics-and-theory-bridge` (OpenCode/Codex) or `/skill lyrics-and-theory-bridge` (Freebuff)
+Invoke via your agent: `Invoke lyrics-and-theory-bridge` (OpenCode/Codex) or `/skill lyrics-and-theory-bridge` (Freebuff).
 
-## What It Does
+## What it does
 
-- Establishes the harmonic context (key, mode, chord progression) of the backing music.
-- Analyses lyric drafts for rhyme scheme, cadence alignment, and syllable stress patterns.
-- Flags friction points where lyrics clash with the harmonic or rhythmic structure.
-- Proposes theory-informed rewrites with rationale, always showing the original diff.
-- Suggests chord substitutions or rhythmic variations that support the lyrical intent.
-- Logs session decisions to `obsidian-music-journal` when working within an active project.
+- Accepts a lyric draft plus a chord progression (and optionally BPM, key, and genre context).
+- Maps syllable stress patterns to the beat grid to catch flow problems.
+- Labels chord function (tonic, subdominant, dominant, borrowed) and notes how it aligns with lyric intent.
+- Maps melodic contour suggestions to phrasing — rises on stress, hook in sweet spot.
+- For hip-hop contexts: maps multisyllabic rhyme schemes and cadence against the bar grid.
+- Proposes targeted edits at word, line, and structural level.
+- Saves the analysis to the active `music-project-planner` project note or `obsidian-music-journal`.
 
 ## Dependencies
 
-- Lyric draft (can be partial — even two bars is enough to start analysis)
-- Harmonic context: key, chord progression, or sample identification
-- Optional: tempo (BPM) and time signature for rhythmic analysis
+- Lyric draft and chord progression (plain text is fine)
+- Optional: Obsidian vault for saving analysis notes
 
 ## Companion Skills
 
