@@ -8,7 +8,7 @@ This file is the runtime skill index for OpenCode, Freebuff, Antigravity CLI, an
 - **Freebuff:** `/skill <skill-id>`
 - **Antigravity CLI:** Load via your skill manager (aix/OpenPackage) pointing at this repo.
 
-All skills live in `skills/<category>/<skill-id>.SKILL.md`. The full reference is in `REFERENCE.md`.
+All canonical skills live in `skills/<skill-id>/SKILL.md`. The full reference is in `REFERENCE.md`.
 
 ---
 
@@ -44,6 +44,14 @@ Invoke homelab-logbook
 Invoke obsidian-homelab-logbook
 ```
 
+### Homelab Security / Network Audit Session
+```
+Invoke homelab-safe-ops
+Invoke homelab-network-auditor
+Invoke homelab-change-planner
+Invoke homelab-logbook
+```
+
 ### Media Acquisition Session (Soulseek / slskd)
 ```
 Invoke soulseek-network-orienter
@@ -73,9 +81,19 @@ Invoke obsidian-music-journal
 Invoke music-listening-journal
 ```
 
+### Music Production / Project Session
+```
+Invoke music-project-planner
+Invoke music-listening-journal
+Invoke dj-mix-documentarian
+Invoke obsidian-music-journal
+Invoke lyrics-and-theory-bridge
+```
+
 ### Obsidian Vault Session
 ```
 Invoke obsidian-vault-architect
+Invoke obsidian-vault-manager
 Invoke obsidian-markdown
 Invoke obsidian-bases
 Invoke defuddle
@@ -106,13 +124,31 @@ Ensure these MCP servers are configured and running before invoking related skil
 
 | MCP | Config | Required For |
 |---|---|---|
-| Proxmox MCP | `mcp/proxmox-mcp.json` | homelab-topology-mapper, homelab-sre-agent |
-| Slsk MCP | `mcp/slsk-mcp.json` | slsk-mcp-client, soulseek-network-orienter |
-| slskd-mcp | `mcp/slskd-mcp.json` | slskd-media-acquisition |
-| Subsonic MCP | `mcp/subsonic-mcp.json` | subsonic-media-server, subsonic-api-client |
+| Proxmox MCP | `mcp/proxmox-mcp.json` | `homelab-topology-mapper`, `homelab-sre-agent` |
+| Slsk MCP | `mcp/slsk-mcp.json` | `slsk-mcp-client`, `soulseek-network-orienter` |
+| slskd-mcp | `mcp/slskd-mcp.json` | `slskd-media-acquisition` |
+| Subsonic MCP | `mcp/subsonic-mcp.json` | `subsonic-media-server`, `subsonic-api-client` |
 
 ---
 
-## Full Skill List
+## Skill Path Reference
 
-See `REFERENCE.md` for the complete 48-skill table with descriptions and paths.
+All canonical skills follow the pattern `skills/<skill-id>/SKILL.md`. Examples:
+
+```
+skills/homelab-safe-ops/SKILL.md
+skills/soulseek-network-orienter/SKILL.md
+skills/obsidian-vault-architect/SKILL.md
+skills/netrunner-media-orchestrator/SKILL.md
+skills/dj-set-architect/SKILL.md
+```
+
+Domain meta-aggregator indexes (discovery only, not skill specs):
+
+```
+skills/homelab/README.md
+skills/media/README.md
+skills/obsidian/README.md
+```
+
+See `REFERENCE.md` for the complete skill table with descriptions and paths.

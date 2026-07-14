@@ -7,16 +7,28 @@
 
 ## Overview
 
-This library provides structured behavioral skills for AI coding and automation agents. Skills are organized into domain clusters and wired to MCP (Model Context Protocol) action layers that provide live tool access.
+This library provides structured behavioral skills for AI coding and automation agents. Skills are organized into a flat canonical tree (`skills/<name>/`) and wired to MCP action layers for live tool access.
 
 ### Four-Layer Architecture
 
 ```
 [Agent]
-  └─ [Skills Layer]      <- SKILL.md files in skills/<domain>/
-       └─ [MCP Layer]     <- mcp/*.json configs
-            └─ [Tools]    <- Proxmox API, slskd REST, Subsonic API, Obsidian vault
-                 └─ [Memory Layer]  <- Obsidian vault notes
+  └─ [Skills Layer]         ← skills/<name>/SKILL.md
+       └─ [MCP Layer]        ← mcp/*.json configs
+            └─ [Tools]        ← Proxmox API, slskd REST, Subsonic API, Obsidian vault
+                 └─ [Memory]  ← Obsidian vault notes + Cipher/Mem0
+```
+
+### Skill Folder Layout
+
+Every canonical skill lives in its own directory:
+
+```
+skills/<skill-name>/
+  SKILL.md        ← canonical behavioral spec (inputs, outputs, workflow, safety, failure modes)
+  README.md       ← quick-start, usage notes, dependencies, companion skills
+  references/     ← external docs, patterns, design notes, example prompts
+  scripts/        ← helper CLIs, test harnesses, setup utilities
 ```
 
 ---
@@ -32,21 +44,21 @@ cd agent-skills-library
 
 ### 2. Wire an MCP config
 
-Copy the stub from `mcp/` and fill in your credentials:
+Copy a stub from `mcp/` and fill in your credentials:
 
 ```bash
 cp mcp/proxmox-mcp.json ~/.config/my-agent/mcp/proxmox-mcp.json
-# Edit the file to set PROXMOX_HOST, PROXMOX_USER, PROXMOX_TOKEN_NAME, PROXMOX_TOKEN_VALUE
+# Edit: set PROXMOX_HOST, PROXMOX_USER, PROXMOX_TOKEN_NAME, PROXMOX_TOKEN_VALUE
 ```
 
-### 3. Load a skill
+### 3. Load skills in your agent config
 
-In your agent config, point to the skill file:
+Point to the canonical skill path:
 
 ```yaml
 skills:
-  - path: skills/homelab/homelab-safe-ops.SKILL.md
-  - path: skills/media/subsonic-api-client.SKILL.md
+  - path: skills/homelab-safe-ops/SKILL.md
+  - path: skills/subsonic-api-client/SKILL.md
 ```
 
 ### 4. Invoke a skill
@@ -60,57 +72,89 @@ skills:
 
 ### Homelab
 
-**Skills:** `homelab-safe-ops`, `homelab-change-planner`, `homelab-monitoring-analyst`, `homelab-logbook`, `homelab-research-librarian`, `homelab-sre-agent`, `proxmox-topology-mapper`, `docker-app-deployer`, `reverse-proxy-and-tunnel`, `media-stack-builder`
+**Skills:** `homelab-safe-ops` · `homelab-change-planner` · `homelab-monitoring-analyst` · `homelab-logbook` · `homelab-research-librarian` · `homelab-sre-agent` · `homelab-topology-mapper` · `homelab-network-auditor` · `docker-app-deployer` · `reverse-proxy-and-tunnel` · `media-stack-builder`
 
 **MCP:** `mcp/proxmox-mcp.json`
 
-**Workflow pattern:**
-1. Run `proxmox-topology-mapper` to understand current state.
-2. Use `homelab-change-planner` to draft a change with rollback.
-3. Gate execution through `homelab-safe-ops`.
+**Standard workflow:**
+1. Run `homelab-topology-mapper` to understand current state.
+2. Use `homelab-change-planner` to draft a change with rollback steps.
+3. Gate all execution through `homelab-safe-ops`.
 4. Log outcome with `homelab-logbook` + `obsidian-homelab-logbook`.
 
-**Safety:** All destructive operations require `homelab-safe-ops` confirmation gate. Never bypass this step.
+**Network audit workflow:**
+1. `homelab-safe-ops` — confirm scope and get user approval.
+2. `homelab-network-auditor` — run host discovery + port scan against owned infra.
+3. `homelab-change-planner` — create remediation tasks for findings.
+4. `homelab-logbook` — log audit and remediation plan.
+
+**Safety:** All destructive operations require `homelab-safe-ops` confirmation. Never bypass.
 
 ---
 
 ### Media / Music / DJ
 
-**Skills:** `soulseek-network-orienter`, `slskd-media-acquisition`, `slsk-mcp-client`, `subsonic-media-server`, `subsonic-api-client`, `netrunner-media-orchestrator`, `music-library-organizer`, `dj-library-curator`, `dj-set-architect`, `music-listening-journal`, `dj-mix-documentarian`, `music-project-planner`
+**Skills:** `soulseek-network-orienter` · `slskd-media-acquisition` · `slsk-mcp-client` · `subsonic-media-server` · `subsonic-api-client` · `netrunner-media-orchestrator` · `music-library-organizer` · `dj-library-curator` · `dj-set-architect` · `music-listening-journal` · `dj-mix-documentarian` · `music-project-planner` · `lyrics-and-theory-bridge`
 
 **MCP:** `mcp/slsk-mcp.json`, `mcp/slskd-mcp.json`, `mcp/subsonic-mcp.json`
 
-**Pipeline pattern (acquire → organize → serve → document):**
-1. `soulseek-network-orienter` → understand network, search etiquette.
-2. `slskd-media-acquisition` → search and download via slskd.
-3. `music-library-organizer` → tag, structure, deduplicate.
-4. `subsonic-media-server` → trigger rescan, verify ingestion.
-5. `dj-library-curator` → build playlists for mixing.
+**Acquisition → Playback pipeline:**
+1. `soulseek-network-orienter` → orient to network culture and search strategy.
+2. `slskd-media-acquisition` or `slsk-mcp-client` → search and download.
+3. `music-library-organizer` → tag, structure, deduplicate files.
+4. `subsonic-media-server` → trigger rescan; verify ingestion.
+5. `dj-library-curator` → build playlists and crates for mixing.
 6. `dj-set-architect` → plan and sequence the set.
 7. `dj-mix-documentarian` + `obsidian-music-journal` → archive the mix.
 
-For end-to-end automation, use `netrunner-media-orchestrator` to coordinate all steps.
+For full end-to-end automation, invoke `netrunner-media-orchestrator` to coordinate all steps.
 
 ---
 
 ### Obsidian
 
-**Skills:** `obsidian-vault-architect`, `obsidian-homelab-logbook`, `obsidian-music-journal`
+**Skills:** `obsidian-vault-architect` · `obsidian-vault-manager` · `obsidian-homelab-logbook` · `obsidian-music-journal` · `obsidian-markdown` · `obsidian-bases` · `obsidian-cli` · `json-canvas` · `defuddle`
 
-**Role:** Obsidian skills are the memory and journaling layer. All other domains write their outputs here. The vault is the persistent knowledge base for the homelab and music operations.
+**Role:** Obsidian skills are the memory and journaling layer. All other domain skills write their outputs here. The vault is the persistent knowledge base for homelab ops, music curation, and project planning.
 
 **Setup:**
-1. Run `obsidian-vault-architect` once to set up the vault folder structure.
-2. All domain skills will then write to the correct locations automatically.
+1. Run `obsidian-vault-architect` once to establish the vault folder structure.
+2. All domain skills will then write to the correct vault locations automatically.
+3. Use `obsidian-vault-manager` for day-to-day note creation, organization, and link management via the Local REST API.
+
+---
+
+### Coding
+
+**Skills:** `tdd-loop` · `refactor-with-tests` · `architecture-improvement` · `security-audit` · `authz-and-audit-log`
+
+**Always pair with:** `git-safe-ops` (never force-push main, always branch) and `grill-me` (interrogate the plan before writing code).
+
+---
+
+### Meta / Reasoning
+
+**Skills:** `grill-me` · `prompt-auditor` · `write-prd-from-conversation` · `prd-to-kanban-issues` · `orchestrator` · `eval-loop`
+
+**Planning workflow:**
+1. `grill-me` — expose gaps in the plan before committing.
+2. `write-prd-from-conversation` — crystallize requirements.
+3. `prd-to-kanban-issues` — decompose into issues with acceptance criteria.
+4. `orchestrator` — delegate tasks across agents.
+5. `eval-loop` — validate outputs against criteria.
 
 ---
 
 ## Adding a New Skill
 
-1. Create `skills/<domain>/<skill-name>.SKILL.md` from the template below.
-2. Update `REFERENCE.md` with the new skill row.
-3. If a new MCP config is needed, add a stub to `mcp/<mcp-name>.json`.
-4. Update this GUIDE.md if a new domain is introduced.
+1. Create `skills/<skill-name>/` directory.
+2. Add `SKILL.md` using the template below.
+3. Add `README.md` with quick-start, dependencies, and companion skills.
+4. Create `references/` and `scripts/` directories (add `.gitkeep` if empty).
+5. Update `REFERENCE.md` with the new skill row.
+6. If a new MCP config is needed, add a stub to `mcp/<mcp-name>.json`.
+7. Update the relevant domain meta-aggregator `README.md` in `skills/<domain>/`.
+8. Update this `GUIDE.md` if a new domain is introduced.
 
 ### SKILL.md Template
 
@@ -139,10 +183,25 @@ agents: [opencode, freebuff, antigravity, codex]
 1. **Step:** Description.
 2. **Step:** Description.
 
+## Inputs
+
+- [Input 1 description]
+- [Input 2 description]
+
+## Outputs
+
+- [Output 1 description]
+- [Output 2 description]
+
 ## Safety
 
 - [Constraint 1]
 - [Constraint 2]
+
+## Failure Modes
+
+- [Failure mode 1 — how to handle]
+- [Failure mode 2 — how to handle]
 
 ## References
 
@@ -171,12 +230,15 @@ Never commit real credentials. Use environment variables or a secrets manager.
 
 ## Repeatable Iteration Pattern
 
-For each new skill cluster:
-1. Create SKILL.md files in `skills/<domain>/`.
-2. Create or update MCP JSON stub in `mcp/`.
-3. Add rows to `REFERENCE.md`.
-4. Update this GUIDE.md domain section.
-5. Commit with `feat: add <domain> skills`.
+For each new skill or skill cluster:
+
+1. Create `skills/<name>/SKILL.md` from the template above.
+2. Add `README.md`, `references/`, `scripts/` to the skill directory.
+3. Create or update MCP JSON stub in `mcp/` if new tooling is needed.
+4. Add rows to `REFERENCE.md`.
+5. Update the relevant domain meta-aggregator (`skills/<domain>/README.md`).
+6. Update this `GUIDE.md` domain section.
+7. Commit: `feat: add <skill-name> skill` or `feat: add <domain> skill cluster`.
 
 ---
 
@@ -184,56 +246,26 @@ For each new skill cluster:
 
 ```
 agent-skills-library/
-  README.md              <- overview and quickstart
-  GUIDE.md               <- this file: practitioner guide
-  REFERENCE.md           <- master skill + MCP index
-  agents.md              <- per-agent config notes
+  README.md              ← overview, quickstart, philosophy
+  GUIDE.md               ← this file: practitioner guide
+  REFERENCE.md           ← master skill + MCP index
+  agents.md              ← per-agent session skill groups and MCP config
   skills/
-    homelab/             <- homelab domain skills
-    media/               <- media/music/DJ domain skills
-    obsidian/            <- obsidian vault skills
-    meta/                <- meta/reasoning skills
-    coding/              <- coding skills
-    social/              <- social skills
+    <skill-name>/        ← canonical skill tree (one per skill)
+      SKILL.md
+      README.md
+      references/
+      scripts/
+    homelab/README.md    ← homelab family meta-aggregator index
+    media/README.md      ← media family meta-aggregator index
+    obsidian/README.md   ← obsidian family meta-aggregator index
+    meta/                ← composite specs: meta/reasoning skills
+    coding/              ← composite specs: coding skills
+    social/              ← composite specs: social skills
+    mcp/                 ← composite specs: MCP/tool bridge skills
   mcp/
-    proxmox-mcp.json     <- Proxmox VE MCP config
-    slsk-mcp.json        <- Soulseek MCP config
-    slskd-mcp.json       <- slskd MCP config
-    subsonic-mcp.json    <- Subsonic MCP config
+    proxmox-mcp.json
+    slsk-mcp.json
+    slskd-mcp.json
+    subsonic-mcp.json
 ```
-
-
----
-
-## New Skills — Quick Reference
-
-### homelab-network-auditor
-Audits the homelab network for open ports, exposed services, and firewall rule gaps.
-
-**Invoke:** `Invoke homelab-network-auditor` (OpenCode/Codex) | `/skill homelab-network-auditor` (Freebuff)
-
-**Workflow:**
-1. Define scope (IP range / VLAN).
-2. Run host discovery + port scan.
-3. Compare results against documented firewall rules.
-4. Review exposure report for unexpected open ports.
-5. Create remediation tasks in `homelab-change-planner`.
-6. Log findings in `homelab-logbook`.
-
-**Safety:** Scope confirmation required before any scan. Only scan owned infrastructure.
-
----
-
-### obsidian-vault-manager
-Primary interface for all Obsidian vault operations: create notes, manage folders, apply templates, and maintain internal links.
-
-**Invoke:** `Invoke obsidian-vault-manager` (OpenCode/Codex) | `/skill obsidian-vault-manager` (Freebuff)
-
-**Workflow:**
-1. Connect to Obsidian Local REST API (port 27123).
-2. Resolve target note path within vault.
-3. Apply template if creating new note in templated folder.
-4. Write content with correct frontmatter, tags, and wikilinks.
-5. Update index notes as needed.
-
-**MCP:** Obsidian Local REST API plugin — https://github.com/coddingtonbear/obsidian-local-rest-api
