@@ -1,0 +1,23 @@
+{
+  "name": "slsk-mcp",
+  "description": "MCP server for Soulseek network access. Exposes search, browse, and download operations via MCP tool calls.",
+  "version": "1.0.0",
+  "upstream": "https://github.com/pvnkmnk/slsk-mcp",
+  "transport": "stdio",
+  "env": {
+    "SLSK_USERNAME": "<your-soulseek-username>",
+    "SLSK_PASSWORD": "<your-soulseek-password>",
+    "SLSK_DOWNLOAD_DIR": "<path-to-download-directory>"
+  },
+  "skills": [
+    "soulseek-network-orienter",
+    "slsk-mcp-client",
+    "netrunner-media-orchestrator"
+  ],
+  "safety": [
+    "Only download files with explicit user confirmation.",
+    "Credentials must be in env vars, never in prompts or code.",
+    "Respect Soulseek network etiquette; do not spam searches."
+  ],
+  "notes": "Requires a running Soulseek account. Replace placeholder env vars before use."
+}
