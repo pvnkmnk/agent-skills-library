@@ -1,0 +1,23 @@
+{
+  "name": "slskd-mcp",
+  "description": "MCP server for slskd (Soulseek daemon) REST API. Exposes search, transfer management, and share operations.",
+  "version": "1.0.0",
+  "upstream": "https://github.com/slskd/slskd",
+  "transport": "stdio",
+  "env": {
+    "SLSKD_API_URL": "http://localhost:5030",
+    "SLSKD_API_KEY": "<your-slskd-api-key>",
+    "SLSKD_DOWNLOAD_DIR": "<path-to-download-directory>"
+  },
+  "skills": [
+    "slskd-media-acquisition",
+    "soulseek-network-orienter",
+    "netrunner-media-orchestrator"
+  ],
+  "safety": [
+    "All download actions require explicit user confirmation.",
+    "API key must be in env vars, never in prompts or code.",
+    "Monitor disk usage before large batch downloads."
+  ],
+  "notes": "slskd must be running and accessible at SLSKD_API_URL. Replace placeholder values with your actual configuration."
+}
