@@ -52,6 +52,7 @@ Last updated: July 14, 2026
 | `obsidian-vault-architect` | Obsidian | Designs and evolves vault structure: folders, tags, Bases, MOCs across all domains | `skills/obsidian/obsidian-vault-architect.SKILL.md` |
 | `obsidian-homelab-logbook` | Obsidian | Standardizes homelab change and incident logs as Obsidian notes | `skills/obsidian/obsidian-homelab-logbook.SKILL.md` |
 | `obsidian-music-journal` | Obsidian | Standardizes listening, DJ set, and production journal entries in the vault | `skills/obsidian/obsidian-music-journal.SKILL.md` |
+| `obsidian-vault-manager` | Obsidian | Create, organize, and maintain Obsidian vault notes, folders, templates, and links via the Local REST API | `skills/obsidian-vault-manager/SKILL.md` |
 
 ---
 
@@ -77,6 +78,7 @@ Last updated: July 14, 2026
 | `reverse-proxy-and-tunnel` | Homelab | Secure exposure via Traefik/NPM/Caddy + Cloudflare Tunnel/WireGuard/Tailscale | `skills/homelab/reverse-proxy-and-tunnel.SKILL.md` |
 | `docker-app-deployer` | Homelab | Safe Docker Compose deployment, env var management, and update patterns | `skills/homelab/docker-app-deployer.SKILL.md` |
 | `homelab-sre-agent` | Homelab | SRE-style agent behavior over monitoring tools and MCP endpoints | `skills/homelab/homelab-sre-agent.SKILL.md` |
+| `homelab-network-auditor` | Homelab | Scans homelab for open ports, audits firewall rules, and generates network security reports | `skills/homelab-network-auditor/SKILL.md` |
 
 ---
 
@@ -144,12 +146,12 @@ Last updated: July 14, 2026
 |---|---|
 | Meta / Reasoning | 6 |
 | Coding | 5 |
-| Obsidian (official + bespoke) | 8 |
-| Homelab (behavior + action) | 11 |
+| Obsidian (official + bespoke) | 9  |
+| Homelab (behavior + action) | 12 |
 | Media / Music / DJ | 13 |
 | Social | 2 |
 | MCP / Tool Bridge | 3 |
-| **Total** | **48** |
+| **Total** | **50** 
 
 ---
 
