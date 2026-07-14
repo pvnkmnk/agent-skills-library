@@ -1,0 +1,26 @@
+{
+  "name": "subsonic-mcp",
+  "description": "MCP server for Subsonic/OpenSubsonic API. Exposes music library browsing, playback, playlist management, and search.",
+  "version": "1.0.0",
+  "upstream": "https://opensubsonic.netlify.app/",
+  "transport": "stdio",
+  "env": {
+    "SUBSONIC_URL": "http://localhost:4533",
+    "SUBSONIC_USER": "<your-subsonic-username>",
+    "SUBSONIC_PASSWORD": "<your-subsonic-password>",
+    "SUBSONIC_CLIENT": "agent-skills-library"
+  },
+  "skills": [
+    "subsonic-api-client",
+    "subsonic-media-server",
+    "dj-library-curator",
+    "music-library-organizer",
+    "netrunner-media-orchestrator"
+  ],
+  "safety": [
+    "Read-only by default; playlist creation/deletion requires explicit user confirmation.",
+    "Credentials must be in env vars, never in prompts or code.",
+    "Never delete library entries or rescan library without confirmation."
+  ],
+  "notes": "Compatible with Navidrome, Airsonic, Funkwhale, and any OpenSubsonic-compliant server. Replace placeholder values before use."
+}
