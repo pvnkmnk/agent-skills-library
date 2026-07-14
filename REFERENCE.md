@@ -13,6 +13,10 @@ Last updated: July 14, 2026
 
 ## Meta / Reasoning Skills
 
+> ⚠️ **Ghost specs** — The six skills below are listed in REFERENCE.md but their spec files live at
+> `skills/meta/<skill-id>.SKILL.md` (composite format). Standalone `skills/<skill-id>/SKILL.md` trees
+> have not yet been migrated. These skills are **not yet invocable** until migration is complete.
+
 | Skill ID | Description | Path |
 |---|---|---|
 | `grill-me` | Interrogates a plan or idea with pointed questions to expose gaps before execution | `skills/meta/grill-me.SKILL.md` |
@@ -25,6 +29,9 @@ Last updated: July 14, 2026
 ---
 
 ## Coding Skills
+
+> ⚠️ **Ghost specs** — The five skills below live at `skills/coding/<skill-id>.SKILL.md` (composite format).
+> Standalone trees not yet migrated.
 
 | Skill ID | Description | Path |
 |---|---|---|
@@ -40,6 +47,9 @@ Last updated: July 14, 2026
 
 ### Official Obsidian Skills (upstream: github.com/kepano/obsidian-skills)
 
+> ⚠️ **Ghost specs** — The five upstream skills below live at `skills/obsidian/<skill-id>.SKILL.md`
+> (composite format). No standalone trees.
+
 | Skill ID | Description | Path |
 |---|---|---|
 | `obsidian-markdown` | Teaches Obsidian-flavored Markdown: wikilinks, YAML properties, callouts, embeds, tags | `skills/obsidian/obsidian-markdown.SKILL.md` |
@@ -54,8 +64,14 @@ Last updated: July 14, 2026
 |---|---|---|
 | `obsidian-vault-architect` | Designs and enforces folder structure, naming conventions, MOCs, and template standards for Obsidian vaults | `skills/obsidian-vault-architect/SKILL.md` |
 | `obsidian-homelab-logbook` | Logs homelab change events, incidents, and maintenance notes as structured Obsidian notes | `skills/obsidian-homelab-logbook/SKILL.md` |
-| `obsidian-music-journal` | Standardizes listening, DJ set, and production journal entries in the vault | `skills/obsidian/obsidian-music-journal.SKILL.md` |
+| `obsidian-music-journal` | Standardizes listening, DJ set, and production journal entries in the vault | `skills/obsidian-music-journal/SKILL.md` |
 | `obsidian-vault-manager` | Primary interface for Obsidian vault ops: create notes, manage folders, apply templates, maintain links via Local REST API | `skills/obsidian-vault-manager/SKILL.md` |
+
+> **Deprecated composite files** — the following files in `skills/obsidian/` have been superseded by the
+> standalone skill trees above and should be treated as read-only archives:
+> - `skills/obsidian/obsidian-music-journal.SKILL.md` → superseded by `skills/obsidian-music-journal/SKILL.md`
+> - `skills/obsidian/obsidian-homelab-logbook.SKILL.md` → superseded by `skills/obsidian-homelab-logbook/SKILL.md`
+> - `skills/obsidian/obsidian-vault-architect.SKILL.md` → superseded by `skills/obsidian-vault-architect/SKILL.md`
 
 ---
 
@@ -107,11 +123,14 @@ Last updated: July 14, 2026
 | `dj-set-architect` | Plans sets as emotional arcs (opening → build → peak → comedown → close) with transition tracking | `skills/dj-set-architect/SKILL.md` |
 | `dj-mix-documentarian` | Documents completed DJ mixes: tracklists, timestamps, transitions, gear notes, Obsidian archive | `skills/dj-mix-documentarian/SKILL.md` |
 | `music-project-planner` | Plans music production and release projects with phased milestones, task breakdowns, and Obsidian integration | `skills/music-project-planner/SKILL.md` |
-| `lyrics-and-theory-bridge` | Bridges lyric writing with music theory concepts for composition and arrangement | `skills/media/lyrics-and-theory-bridge.SKILL.md` |
+| `lyrics-and-theory-bridge` | Bridges lyric writing with music theory concepts for composition and arrangement | `skills/lyrics-and-theory-bridge/SKILL.md` |
 
 ---
 
 ## Social Domain Skills
+
+> ⚠️ **Ghost specs** — The two skills below live at `skills/social/<skill-id>.SKILL.md` (composite format).
+> Standalone trees not yet migrated.
 
 | Skill ID | Description | Path |
 |---|---|---|
@@ -138,22 +157,25 @@ Last updated: July 14, 2026
 | `mcp/slsk-mcp.json` | Soulseek P2P access MCP server | MCPMarket: Slsk MCP |
 | `mcp/slskd-mcp.json` | slskd OpenAPI → MCP auto-generated server | github.com/abl030/slskd-mcp |
 | `mcp/subsonic-mcp.json` | Subsonic/OpenSubsonic library ops MCP | subsonic.org / opensubsonic.netlify.app |
+| `mcp/obsidian-mcp.json` | Obsidian Local REST API MCP bridge | github.com/coddingtonbear/obsidian-local-rest-api |
 
 ---
 
 ## Skill Count
 
-| Category | Count |
-|---|---|
-| Meta / Reasoning | 6 |
-| Coding | 5 |
-| Obsidian (official + bespoke) | 9 |
-| Homelab (behavior + action) | 11 |
-| Media / Music / DJ | 13 |
-| Social | 2 |
-| MCP / Tool Bridge | 3 |
-| **Total** | **49** |
+| Category | Committed Standalone Trees | Ghost Specs (composite only) | Total Unique IDs |
+|---|---|---|---|
+| Meta / Reasoning | 0 | 6 | 6 |
+| Coding | 0 | 5 | 5 |
+| Obsidian (official + bespoke) | 4 | 5 | 9 |
+| Homelab (behavior + action) | 11 | 0 | 11 |
+| Media / Music / DJ | 13 | 0 | 13 |
+| Social | 0 | 2 | 2 |
+| MCP / Tool Bridge | 2 | 1 | 3 |
+| **Total** | **30** | **19** | **49** |
 
+> **30 skills have committed standalone `skills/<id>/SKILL.md` trees and are fully invocable.**
+> **19 skills have composite `.SKILL.md` specs only and must be migrated before they are invocable.**
 > Skills are counted by unique skill IDs. MCP config files are not counted as skills.
 
 ---
