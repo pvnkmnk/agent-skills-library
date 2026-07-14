@@ -1,0 +1,26 @@
+{
+  "name": "proxmox-mcp",
+  "description": "MCP server for Proxmox VE homelab management. Exposes node, VM, container, and storage operations via MCP tool calls.",
+  "version": "1.0.0",
+  "upstream": "https://github.com/canvrno/ProxmoxMCP",
+  "transport": "stdio",
+  "env": {
+    "PROXMOX_HOST": "<your-proxmox-host>",
+    "PROXMOX_USER": "<your-proxmox-user>@pam",
+    "PROXMOX_TOKEN_NAME": "<your-api-token-name>",
+    "PROXMOX_TOKEN_VALUE": "<your-api-token-value>",
+    "PROXMOX_VERIFY_SSL": "false"
+  },
+  "skills": [
+    "homelab-safe-ops",
+    "homelab-change-planner",
+    "homelab-monitoring-analyst",
+    "proxmox-topology-mapper"
+  ],
+  "safety": [
+    "All destructive operations require homelab-safe-ops confirmation.",
+    "Credentials must be in env vars, never in prompts or code.",
+    "Use read-only token for monitoring tasks; write token only for change tasks."
+  ],
+  "notes": "Replace all placeholder values with actual Proxmox credentials from your secrets manager."
+}
