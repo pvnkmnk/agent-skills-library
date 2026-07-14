@@ -123,7 +123,7 @@ Last updated: July 14, 2026
 | `dj-set-architect` | Plans sets as emotional arcs (opening → build → peak → comedown → close) with transition tracking | `skills/dj-set-architect/SKILL.md` |
 | `dj-mix-documentarian` | Documents completed DJ mixes: tracklists, timestamps, transitions, gear notes, Obsidian archive | `skills/dj-mix-documentarian/SKILL.md` |
 | `music-project-planner` | Plans music production and release projects with phased milestones, task breakdowns, and Obsidian integration | `skills/music-project-planner/SKILL.md` |
-| `lyrics-and-theory-bridge` | Bridges lyric writing with music theory concepts for composition and arrangement | `skills/lyrics-and-theory-bridge/SKILL.md` |
+| `lyrics-and-theory-bridge` | Bridges lyric writing with music theory: prosody, harmonic function, flow mapping, targeted edit suggestions | `skills/lyrics-and-theory-bridge/SKILL.md` |
 
 ---
 
@@ -143,9 +143,9 @@ Last updated: July 14, 2026
 
 | Skill ID | Description | Path |
 |---|---|---|
-| `memory-layer-bridge` | Teaches agents when to query Cipher/Mem0, when to consult Obsidian, when to log decisions | `skills/mcp/memory-layer-bridge.SKILL.md` |
+| `memory-layer-bridge` | Teaches agents when to query Cipher/Mem0, when to consult Obsidian, when to log decisions | `skills/memory-layer-bridge/SKILL.md` |
 | `filesystem-refactor-planner` | Plans filesystem refactors safely using MCP filesystem tools | `skills/mcp/filesystem-refactor-planner.SKILL.md` |
-| `git-safe-ops` | Encodes safe git operations: no force-push to main, always branch, always review | `skills/mcp/git-safe-ops.SKILL.md` |
+| `git-safe-ops` | Encodes safe git operations: no force-push to main, always branch, always review | `skills/git-safe-ops/SKILL.md` |
 
 ---
 
@@ -171,12 +171,14 @@ Last updated: July 14, 2026
 | Homelab (behavior + action) | 11 | 0 | 11 |
 | Media / Music / DJ | 13 | 0 | 13 |
 | Social | 0 | 2 | 2 |
-| MCP / Tool Bridge | 2 | 1 | 3 |
-| **Total** | **30** | **19** | **49** |
+| MCP / Tool Bridge | 3 | 1 | 4 |
+| **Total** | **31** | **19** | **50** |
 
-> **30 skills have committed standalone `skills/<id>/SKILL.md` trees and are fully invocable.**
+> **31 skills have committed standalone `skills/<id>/SKILL.md` trees and are fully invocable.**
+> (git-safe-ops, memory-layer-bridge, and lyrics-and-theory-bridge standalone trees committed July 14, 2026.)
 > **19 skills have composite `.SKILL.md` specs only and must be migrated before they are invocable.**
 > Skills are counted by unique skill IDs. MCP config files are not counted as skills.
+> `filesystem-refactor-planner` remains composite (1 ghost in MCP / Tool Bridge category).
 
 ---
 
