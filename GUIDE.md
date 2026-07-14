@@ -201,3 +201,39 @@ agent-skills-library/
     slskd-mcp.json       <- slskd MCP config
     subsonic-mcp.json    <- Subsonic MCP config
 ```
+
+
+---
+
+## New Skills — Quick Reference
+
+### homelab-network-auditor
+Audits the homelab network for open ports, exposed services, and firewall rule gaps.
+
+**Invoke:** `Invoke homelab-network-auditor` (OpenCode/Codex) | `/skill homelab-network-auditor` (Freebuff)
+
+**Workflow:**
+1. Define scope (IP range / VLAN).
+2. Run host discovery + port scan.
+3. Compare results against documented firewall rules.
+4. Review exposure report for unexpected open ports.
+5. Create remediation tasks in `homelab-change-planner`.
+6. Log findings in `homelab-logbook`.
+
+**Safety:** Scope confirmation required before any scan. Only scan owned infrastructure.
+
+---
+
+### obsidian-vault-manager
+Primary interface for all Obsidian vault operations: create notes, manage folders, apply templates, and maintain internal links.
+
+**Invoke:** `Invoke obsidian-vault-manager` (OpenCode/Codex) | `/skill obsidian-vault-manager` (Freebuff)
+
+**Workflow:**
+1. Connect to Obsidian Local REST API (port 27123).
+2. Resolve target note path within vault.
+3. Apply template if creating new note in templated folder.
+4. Write content with correct frontmatter, tags, and wikilinks.
+5. Update index notes as needed.
+
+**MCP:** Obsidian Local REST API plugin — https://github.com/coddingtonbear/obsidian-local-rest-api
